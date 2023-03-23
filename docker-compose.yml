@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  postgres:
+    restart: always
+    image: postgres:14.2-alpine
+    volumes:
+      - "postgres-data:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+    build:
+      context: .
+    environment:
+      - POSTGRES_USER=poll
+      - POSTGRES_PASSWORD=poll_db
+      - POSTGRES_DB=poll_db
+
+volumes:
+  postgres-data:

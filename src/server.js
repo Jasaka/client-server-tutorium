@@ -5,17 +5,13 @@ server.get("/", (request, response) => {
 });
 
 server.get("/polls", (request, response) => {
-    response.render('polls.hbs')
+    const polls = require("./queries/polls/getPolls")();
+    response.render('polls.hbs', { polls })
 });
 
 server.get("/polls/:pollId", (request, response) => {
     const { pollId } = request.params;
+    const poll = require("./queries/polls/getPollById")(pollId);
 
-    response.render('poll.hbs', { pollId })
+    response.render('poll.hbs', { poll })
 });
-
-server.get("/api", (request, response) => {
-    response.json({ message: "Hello Api" });
-    response.end();
-});
-

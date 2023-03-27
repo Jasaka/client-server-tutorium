@@ -42,3 +42,13 @@ a {
 html{
     background-color: #f5aaaa;
 }
+
+button{
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 8rem;
+}

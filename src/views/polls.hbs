@@ -1,2 +1,14 @@
 <h1>Polls</h1>
-<p>Here be all Polls</p>
+{{#if polls}}
+	<ul>
+		{{#each polls}}
+			<li>
+				<a href="/polls/{{this.id}}">
+					{{this.name}}
+				</a>
+			</li>
+		{{/each}}
+	</ul>
+{{else}}
+	<p>There are no polls yet.</p>
+{{/if}}

@@ -1,4 +1,6 @@
-<h1>Polls</h1>
+<h1>PollApp+</h1>
+
+<h2>Poll Overview</h2>
 {{#if polls}}
 	<ul>
 		{{#each polls}}
@@ -12,3 +14,11 @@
 {{else}}
 	<p>There are no polls yet.</p>
 {{/if}}
+
+<hr />
+
+<h2>Add a new Poll</h2>
+<input type="text" id="new-poll_input" placeholder="New Poll Name" />
+<button id="add-poll_button" onclick="addPoll()">
+	Add Poll
+</button>

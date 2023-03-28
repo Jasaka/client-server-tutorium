@@ -1,17 +1,29 @@
-const server = require("./config")();
+const {server, prisma} = require("./config")();
 
 server.get("/", (request, response) => {
     response.redirect("/polls")
 });
 
-server.get("/polls", (request, response) => {
-    const polls = require("./queries/polls/getPolls")();
-    response.render('polls.hbs', { polls })
+server.get("/polls", async (request, response) => {
+    const polls = await require("./queries/polls/getPolls")(prisma);
+    response.render('polls.hbs', {polls})
 });
 
-server.get("/polls/:pollId", (request, response) => {
-    const { pollId } = request.params;
-    const poll = require("./queries/polls/getPollById")(pollId);
+server.post("/polls", (request, response) => {
+    const { name } = request.body;
 
-    response.render('poll.hbs', { poll })
+    if (!name || name === "") {
+        return response.sendStatus(400);
+    }
+
+    require("./queries/polls/insertNewPoll")(prisma, name)
+        .then(() => response.sendStatus(200))
+        .catch(() => response.sendStatus(500));
+});
+
+server.get("/polls/:pollId", async (request, response) => {
+    const {pollId} = request.params;
+    const poll = await require("./queries/polls/getPollById")(prisma, pollId);
+
+    response.render('poll.hbs', {poll})
 });

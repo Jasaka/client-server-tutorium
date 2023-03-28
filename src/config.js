@@ -22,13 +22,15 @@ function configureServer() {
     const {engine} = require("express-handlebars");
     const path = require("path");
     const port = process.env.PORT || 3000;
+    const { PrismaClient } = require("@prisma/client");
+    const prisma = new PrismaClient();
     setMiddleware(server, express)
     setStaticFolder(server, express, path);
     configureViewEngine(server, engine, path);
     server.listen(port, () => {
         console.log(`Server listening on port ${port}`);
     });
-    return server;
+    return {server, prisma};
 }
 
 module.exports = configureServer;

@@ -1,9 +1,5 @@
-function getPolls(){
-    const polls = [
-        { id: "1", name: "First Poll" },
-        { id: "2", name: "Second Poll" },
-        { id: "3", name: "Third Poll" },
-    ];
+function getPolls(prisma){
+    const polls = prisma.poll.findMany();
 
     console.log("polls", polls);
 

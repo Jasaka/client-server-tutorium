@@ -1,11 +1,12 @@
-function getPollById(pollId){
-    const polls = [
-        { id: "1", name: "First Poll" },
-        { id: "2", name: "Second Poll" },
-        { id: "3", name: "Third Poll" },
-    ];
-
-    return polls.find(poll => poll.id === pollId);
+function getPollById(prisma, pollId) {
+    return prisma.poll.findUnique({
+        where: {
+            id: pollId
+        },
+        include: {
+            votes: true
+        }
+    })
 }
 
 module.exports = getPollById;

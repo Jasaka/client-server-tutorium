@@ -24,6 +24,20 @@ server.post("/polls", (request, response) => {
 server.get("/polls/:pollId", async (request, response) => {
     const {pollId} = request.params;
     const poll = await require("./queries/polls/getPollById")(prisma, pollId);
+    const {VoteOption} = require("@prisma/client");
 
-    response.render('poll.hbs', {poll})
+    response.render('poll.hbs', {VoteOption, poll})
+});
+
+server.post("/polls/:pollId", async (request, response) => {
+    const {pollId} = request.params;
+    const {voterName, voteOption} = request.body;
+
+    if (!voterName || voterName === "") {
+        return response.sendStatus(400);
+    }
+
+    require("./queries/votes/insertNewVote")(prisma, pollId, voterName, voteOption)
+        .then(() => response.sendStatus(200))
+        .catch(() => response.sendStatus(500));
 });

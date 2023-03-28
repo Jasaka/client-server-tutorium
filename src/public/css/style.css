@@ -46,8 +46,12 @@ body{
     margin:2rem;
 }
 
+h1{
+    font-size: 2rem;
+}
+
 h2{
-    margin-top: 3rem;
+    margin-top: 1rem;
 }
 
 hr{
@@ -69,4 +73,22 @@ input{
     padding: 10px;
     font-weight: 600;
     width: 32rem;
+}
+
+select{
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 600;
+    width: 16rem;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table{
+    width: 64rem;
 }

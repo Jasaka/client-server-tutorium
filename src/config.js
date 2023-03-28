@@ -6,7 +6,8 @@ function setStaticFolder(server, express, path) {
     server.use(express.static(path.join(__dirname, "public")));
 }
 
-function configureViewEngine(server, engine, path) {
+function configureViewEngine(server, path) {
+    const {engine} = require("express-handlebars");
     server.engine('hbs', engine({
         defaultLayout: 'main',
         extname: '.hbs',
@@ -15,21 +16,29 @@ function configureViewEngine(server, engine, path) {
     server.set('views', path.join(__dirname, 'views'));
 }
 
-function configureServer() {
-    require("dotenv").config();
+function setupPrisma() {
+    const {PrismaClient} = require("@prisma/client");
+    return new PrismaClient();
+}
+
+function setupExpress() {
     const express = require("express");
     const server = express();
-    const {engine} = require("express-handlebars");
     const path = require("path");
     const port = process.env.PORT || 3000;
-    const { PrismaClient } = require("@prisma/client");
-    const prisma = new PrismaClient();
     setMiddleware(server, express)
     setStaticFolder(server, express, path);
-    configureViewEngine(server, engine, path);
+    configureViewEngine(server, path);
     server.listen(port, () => {
         console.log(`Server listening on port ${port}`);
     });
+    return server;
+}
+
+function configureServer() {
+    require("dotenv").config();
+    const prisma = setupPrisma();
+    const server = setupExpress();
     return {server, prisma};
 }
 

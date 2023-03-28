@@ -1,4 +1,4 @@
-function insertNewPoll(prisma, pollName){
+async function insertNewPoll(prisma, pollName){
     return prisma.poll.create({
         data: {
             name: pollName

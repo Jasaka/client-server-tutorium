@@ -1,0 +1,38 @@
+<h1>{{poll.name}}</h1>
+
+<h2>Current Votes</h2>
+{{#if poll.votes}}
+	<table>
+		<thead>
+		<tr>
+			<th>Voter Name</th>
+			<th>Voted Option</th>
+		</tr>
+		</thead>
+		{{#each poll.votes}}
+			<tr>
+				<td>{{this.voterName}}</td>
+				<td>{{this.votedOption}}</td>
+			</tr>
+		{{/each}}
+	</table>
+{{else}}
+	<p>Be the first to vote!</p>
+{{/if}}
+<hr/>
+<h2>Add a new Vote!</h2>
+<label for="voter-name_input">Your Name:</label>
+<input id="voter-name_input" type="text" placeholder="Darth Vader">
+
+<label for="option_select">Your Vote:</label>
+<select id="option_select">
+	{{#each VoteOption}}
+		<option value="{{@key}}">{{@key}}</option>
+	{{/each}}
+</select>
+
+<button id="add-vote_button" onclick="addVote('{{poll.id}}')">Vote!</button>
+<hr/>
+<button>
+	<a href="/polls">Back to Polls</a>
+</button>

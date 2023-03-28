@@ -1,0 +1,94 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    color: #000000;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+
+#root, #__next {
+    isolation: isolate;
+}
+
+a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+body{
+    margin:2rem;
+}
+
+h1{
+    font-size: 2rem;
+}
+
+h2{
+    margin-top: 1rem;
+}
+
+hr{
+    margin-top: 3rem;
+}
+
+button{
+    margin-top: 1rem;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 8rem;
+}
+
+input{
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 600;
+    width: 32rem;
+}
+
+select{
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 600;
+    width: 16rem;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table{
+    width: 64rem;
+}

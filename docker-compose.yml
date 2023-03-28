@@ -5,15 +5,21 @@ services:
     restart: always
     image: postgres:14.2-alpine
     volumes:
-      - "postgres-data:/var/lib/postgresql/data"
+      - "postgres-csb-data:/var/lib/postgresql/data"
     ports:
       - "5432:5432"
     build:
       context: .
     environment:
-      - POSTGRES_USER=poll
-      - POSTGRES_PASSWORD=poll_db
+      - POSTGRES_USER=poll_user
+      - POSTGRES_PASSWORD=poll_pw
       - POSTGRES_DB=poll_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U poll_user -d poll_db" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
 
 volumes:
-  postgres-data:
+  postgres-csb-data:

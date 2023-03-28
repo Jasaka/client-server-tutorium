@@ -22,11 +22,6 @@ server.get("/polls/:pollId", (request, response) => {
     response.end();
 });
 
-server.get("/api", (request, response) => {
-    response.json({ message: "Hello Api" });
-    response.end();
-});
-
 
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
